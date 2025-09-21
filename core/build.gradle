@@ -1,0 +1,41 @@
+plugins {
+	// These plugins are made available to subprojects but not applied to the root.
+	// The root project is just an aggregator and should not have source code.
+	id 'java'
+	id 'org.springframework.boot' version '3.5.6' apply false
+	id 'io.spring.dependency-management' version '1.1.7' apply false
+}
+
+// Common configuration for the root project and all subprojects.
+allprojects {
+	group = "com.search"
+	version = "0.0.1-SNAPSHOT"
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+// Configuration to be applied to all subprojects (e.g., 'ai').
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	java {
+		toolchain {
+			languageVersion = JavaLanguageVersion.of(21)
+		}
+	}
+
+	// Common test configuration for all subprojects
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+}
+
+// The root project itself has no source code, so it has no dependencies.
+// Dependencies should be declared in the build.gradle of the respective submodules.
+dependencies {
+	// No dependencies here
+}
