@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ai
+  ai:
+    # TODO: change the format of open api key naming convention
+    openai:
+      api-key: ${openapikey}
+    vectorstore:
+      pgvector:
+        index-type: HNSW
+        distance-type: COSINE_DISTANCE
+        dimensions: 1536
+        max-document-batch-size: 10000 # Optional: Maximum number of documents per batch
+  jpa:
+    hibernate:
+      ddl-auto: update
